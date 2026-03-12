@@ -30,7 +30,13 @@
 
             <div class="board"></div>
 
-            <div id="game-over-card" class="hidden">
+            <div id="start-card" class="modal">
+                <h2>Snake Game Pro</h2>
+                <p>Press Enter or click to play</p>
+                <button id="start-btn">Start Game</button>
+            </div>
+
+            <div id="game-over-card" class="modal hidden">
                 <h2 id="game-over-title">Game Over!</h2>
                 <p id="game-over-msg">Message yahan aayega</p>
                 <div class="score-board">
@@ -40,7 +46,7 @@
                 <button id="restart-btn">Play Again (Enter)</button>
             </div>
 
-            <div id="level-up-card" class="hidden">
+            <div id="level-up-card" class="modal hidden">
                 <h2 id="level-title">Level Up! 🚀</h2>
                 <p>Welcome to Level <span id="current-level">2</span></p>
             </div>

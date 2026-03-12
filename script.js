@@ -13,6 +13,8 @@ const restartBtn = document.getElementById('restart-btn');
 const levelUpCard = document.getElementById('level-up-card');
 const currentLevelElement = document.getElementById('current-level');
 const timeElement = document.getElementById('time');
+const startCard = document.getElementById('start-card');
+const startBtn = document.getElementById('start-btn');
 
 // ==========================================
 // 2. AUDIO FILES
@@ -31,6 +33,7 @@ let score = 0;
 let level = 1;
 let highScore = localStorage.getItem('snakeHighScore') || 0;
 highScoreElement.innerText = highScore;
+let isGameStarted = false;
 
 const blockHeight = 50;
 const blockWidth = 50;
@@ -49,7 +52,7 @@ board.style.flexGrow = '0';
 
 // 🚀 OPTIMIZED: Array ki jagah Object use kiya kyunki hum string keys ('row-col') use kar rahe hain
 const blocks = {};
-const snake = [{ x: 1, y: 1 }, { x: 0, y: 1 }, { x: 0, y: 2 }];
+const snake = [{ x: 3, y: 2 }];
 
 let dx = 0;
 let dy = 1;
@@ -242,7 +245,7 @@ function restartGame() {
     // Board aur Snake reset
     clearBoard();
     snake.length = 0;
-    snake.push({ x: 1, y: 1 }, { x: 0, y: 1 }, { x: 0, y: 2 });
+    snake.push({ x: 3, y: 2 });
 
     // Purana khana mitao aur naya banao
     const oldFood = blocks[`${food.x}-${food.y}`];
@@ -259,28 +262,43 @@ function restartGame() {
 // 6. EVENT LISTENERS & INITIALIZATION
 // ==========================================
 
-document.addEventListener('keydown', (event) => {
-    if (bgMusic.paused && !isGameOver) bgMusic.play();
+function initGame() {
+    startCard.classList.add('hidden');
+    isGameStarted = true;
+    restartGame();
+}
 
-    if (isGameOver && event.key === 'Enter') {
+startBtn.addEventListener('click', initGame);
+
+restartBtn.addEventListener('click', () => {
+    if (isGameOver) restartGame();
+});
+
+document.addEventListener('keydown', (event) => {
+    // Start game from the home screen using Enter
+    if (!isGameStarted && event.key === 'Enter') {
+        initGame();
+        return;
+    }
+
+    // Restart game from Game Over screen using Enter
+    if (isGameStarted && isGameOver && event.key === 'Enter') {
         restartGame();
         return;
     }
 
-    if (isGameOver) return;
+    // Prevent movement if game hasn't started or is over
+    if (!isGameStarted || isGameOver) return;
 
+    if (bgMusic.paused) bgMusic.play().catch(e => console.log("Audio waiting"));
+
+    // Movement controls
     if (event.key === 'ArrowUp' && dx !== 1) { dx = -1; dy = 0; }
     else if (event.key === 'ArrowDown' && dx !== -1) { dx = 1; dy = 0; }
     else if (event.key === 'ArrowLeft' && dy !== 1) { dx = 0; dy = -1; }
     else if (event.key === 'ArrowRight' && dy !== -1) { dx = 0; dy = 1; }
 });
 
-restartBtn.addEventListener('click', () => {
-    if (isGameOver) restartGame();
-});
-
-// Game Shuru Karo!
+// Render the initial background state (but don't start the timers!)
 generateFood();
 render();
-gameLoop = setInterval(move, gameSpeed);
-timerLoop = setInterval(updateTime, 1000);
