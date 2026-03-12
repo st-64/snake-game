@@ -358,6 +358,21 @@ function handleSwipe(startX, startY, endX, endY) {
     }
 }
 
+// ==========================================
+// 🚀 PROGRESSIVE WEB APP (OFFLINE SUPPORT)
+// ==========================================
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+            .then((registration) => {
+                console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            })
+            .catch((error) => {
+                console.log('ServiceWorker registration failed: ', error);
+            });
+    });
+}
+
 
 // Render the initial background state (but don't start the timers!)
 generateFood();

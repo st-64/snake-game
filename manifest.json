@@ -1,0 +1,21 @@
+{
+  "name": "Snake Game Pro",
+  "short_name": "Snake Pro",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0c0c0c",
+  "theme_color": "#0aaa47",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "./snake-logo.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "./snake-logo.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
