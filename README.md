@@ -1,5 +1,9 @@
 # 🐍 Snake Game Pro
 
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+
 A **modern and highly optimized version of the classic Snake Game** built using **Vanilla JavaScript, HTML5, and CSS3**.
 
 This project focuses on **clean UI design, optimized DOM rendering, smooth gameplay mechanics, and modern frontend practices** such as CSS variables, dynamic CSS Grid layouts, and browser storage.
@@ -88,7 +92,7 @@ Included sounds:
 - 💀 Game over sound
 - ▶ Game start sound
 
-The background music starts automatically when the player interacts with the game.
+Includes a **custom Start Screen** to gracefully handle strict browser audio autoplay policies, ensuring music starts seamlessly upon user interaction.
 
 ---
 
@@ -101,13 +105,14 @@ Design features include:
 - CSS custom variables (design system)
 - Flexbox layouts
 - CSS Grid game board
-- Custom modal cards
+- Glassmorphism (Frosted Glass) Modals
 - Smooth shadows and spacing system
 
 UI components:
 
 - Scoreboard
 - Game board
+- Interactive Start Screen
 - Game Over modal
 - Level Up popup
 
@@ -181,6 +186,7 @@ Main components:
 
 - Scoreboard
 - Game board
+- Start screen
 - Game Over modal
 - Level Up notification
 
@@ -194,7 +200,7 @@ Used for modern UI styling including:
 - Flexbox
 - CSS Grid
 - Shadows
-- Modal cards
+- Glassmorphism modals
 - Responsive spacing system
 
 ---
@@ -234,13 +240,13 @@ Handles the entire game engine including:
 
 # 🎮 Game Controls
 
-| Key | Action |
-|----|----|
-| ↑ Arrow | Move Up |
-| ↓ Arrow | Move Down |
-| ← Arrow | Move Left |
-| → Arrow | Move Right |
-| Enter | Restart Game |
+| Key     | Action               |
+| ------- | -------------------- |
+| ↑ Arrow | Move Up              |
+| ↓ Arrow | Move Down            |
+| ← Arrow | Move Left            |
+| → Arrow | Move Right           |
+| Enter   | Start / Restart Game |
 
 ---
 
