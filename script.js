@@ -299,6 +299,66 @@ document.addEventListener('keydown', (event) => {
     else if (event.key === 'ArrowRight' && dy !== -1) { dx = 0; dy = 1; }
 });
 
+
+// ==========================================
+// 📱 MOBILE TOUCH CONTROLS (SWIPE DETECTION)
+// ==========================================
+
+let touchStartX = 0;
+let touchStartY = 0;
+
+// 1. Capture where the finger first touches the screen
+document.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+}, { passive: false });
+
+// 2. Prevent the screen from scrolling/refreshing while swiping
+document.addEventListener('touchmove', (e) => {
+    if (isGameStarted && !isGameOver) {
+        e.preventDefault();
+    }
+}, { passive: false });
+
+// 3. Capture where the finger leaves the screen and calculate the swipe
+document.addEventListener('touchend', (e) => {
+    if (!isGameStarted || isGameOver) return;
+
+    let touchEndX = e.changedTouches[0].screenX;
+    let touchEndY = e.changedTouches[0].screenY;
+
+    handleSwipe(touchStartX, touchStartY, touchEndX, touchEndY);
+});
+
+function handleSwipe(startX, startY, endX, endY) {
+    let diffX = endX - startX;
+    let diffY = endY - startY;
+
+    // If the swipe is too small (just a tap), ignore it
+    if (Math.abs(diffX) < 30 && Math.abs(diffY) < 30) return;
+
+    // Start background music if it's paused
+    if (bgMusic.paused) bgMusic.play().catch(e => console.log("Audio waiting"));
+
+    // Check if the swipe was mostly horizontal or mostly vertical
+    if (Math.abs(diffX) > Math.abs(diffY)) {
+        // Horizontal Swipe
+        if (diffX > 0 && dy !== -1) {
+            dx = 0; dy = 1; // Swipe Right
+        } else if (diffX < 0 && dy !== 1) {
+            dx = 0; dy = -1; // Swipe Left
+        }
+    } else {
+        // Vertical Swipe
+        if (diffY > 0 && dx !== -1) {
+            dx = 1; dy = 0; // Swipe Down
+        } else if (diffY < 0 && dx !== 1) {
+            dx = -1; dy = 0; // Swipe Up
+        }
+    }
+}
+
+
 // Render the initial background state (but don't start the timers!)
 generateFood();
 render();

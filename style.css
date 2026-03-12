@@ -8,6 +8,12 @@ html,
 body {
     height: 100%;
     width: 100%;
+    touch-action: none;
+    /* 🔴 CRITICAL: Stops pull-to-refresh and browser swiping */
+    user-select: none;
+    /* 🔴 Prevents text from highlighting while swiping */
+    overflow: hidden;
+    /* 🔴 Prevents any accidental page scrolling */
 }
 
 :root {
@@ -192,4 +198,25 @@ section .infos {
     background: rgba(40, 167, 69, 0.2);
     /* Tint of green */
     border: 1px solid rgba(40, 167, 69, 0.4);
+}
+
+/* ==========================================
+   📱 MOBILE RESPONSIVENESS
+   ========================================== */
+@media (max-width: 600px) {
+    section {
+        padding: var(--space-sm);
+        /* Shrinks padding to give the board more room */
+        gap: var(--space-sm);
+    }
+
+    .info {
+        font-size: 1rem;
+        padding: var(--space-xs) var(--space-sm);
+    }
+
+    .modal {
+        min-width: 280px;
+        padding: var(--space-lg);
+    }
 }
