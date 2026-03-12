@@ -124,7 +124,7 @@ function render() {
     // Pehle Khane ko draw karo
     const foodBlock = blocks[`${food.x}-${food.y}`];
     if (foodBlock) {
-        foodBlock.style.backgroundColor = 'rgba(255, 0, 0, 0.7)'; // Thoda transparent red taaki dikhe ki khaana hai
+        foodBlock.style.backgroundColor = 'rgb(223, 118, 12)';
     }
 
     // Snake draw karo
